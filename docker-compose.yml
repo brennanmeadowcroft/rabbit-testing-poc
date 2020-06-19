@@ -1,0 +1,38 @@
+version: "3"
+services:
+  api:
+    build: .
+    container_name: my-service
+    ports:
+      - 8080:8080
+    environment:
+      RABBIT_HOST: rabbit
+      WORK_QUEUE: work
+      RESPONSE_QUEUE: response
+      LOG_LEVEL: error
+      PORT: 8080
+    command:
+      [
+        "./wait-for-it/wait-for-it.sh",
+        "rabbit:5672",
+        "--",
+        "node",
+        "src/index.js",
+      ]
+  rabbit:
+    image: rabbitmq:3.8.5
+    container_name: rabbit
+    ports:
+      - 5672:5672
+    logging:
+      driver: none
+  testing:
+    build:
+      context: .
+      dockerfile: ./test/test.Dockerfile
+    environment:
+      RABBIT_HOST: rabbit
+      WORK_QUEUE: work
+      RESPONSE_QUEUE: response
+    command:
+      ["./wait-for-it/wait-for-it.sh", "api:8080", "-s", "--", "npm", "test"]

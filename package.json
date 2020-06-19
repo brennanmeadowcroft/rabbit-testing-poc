@@ -1,0 +1,23 @@
+{
+  "name": "rabbit-testing-poc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/*.test.js --exit",
+    "test:docker-compose": "docker-compose up --build --abort-on-container-exit",
+    "start": "node src/index.js",
+    "send": "RABBIT_HOST=localhost WORK_QUEUE=work node ./src/lib/rabbit/send.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.5.6",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.0.1"
+  }
+}
