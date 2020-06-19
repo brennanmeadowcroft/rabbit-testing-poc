@@ -2,7 +2,7 @@ const { expect } = require("chai");
 const Rabbit = require("./lib/Rabbit");
 
 let responseRabbit, workRabbit;
-const { RABBIT_HOST, WORK_QUEUE, RESPONSE_QUEUE } = process.env;
+const { RABBIT_HOST, WORK_QUEUE, RESPONSE_QUEUE, INCLUDE_FAIL } = process.env;
 
 describe("Business Logic", function () {
   before(async function () {
@@ -45,4 +45,15 @@ describe("Business Logic", function () {
       expect(message).to.eq(businessLogicMessage);
     });
   });
+
+  if (parseInt(INCLUDE_FAIL) === 1) {
+    describe("when an invalid parameter is provided", function () {
+      it("should absolutely fail this test", async function () {
+        await workRabbit.send("Chewbacca");
+
+        const message = await responseRabbit.poll();
+        expect(true).to.eq(false);
+      });
+    });
+  }
 });

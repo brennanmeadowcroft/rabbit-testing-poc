@@ -1,4 +1,4 @@
-const Rabbit = require("./lib/rabbit/createChannel");
+const Rabbit = require("./lib/rabbit/RabbitClient");
 const logger = require("./lib/logger")(process.env.LOG_LEVEL);
 const doBusinessLogic = require("./lib/biz-logic");
 const app = require("./httpApp");

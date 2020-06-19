@@ -10,6 +10,20 @@ This will startup the service, RabbitMQ and run the tests inside Docker Compose.
 
 **💡Note:** Logging is turned off entirely for Rabbit and minimized for the service to keep the noise down and make it easier to see the results of testing. This can be changed if needed, see [Logging](#logging)
 
+### Forcing a failed test
+
+To view the behavior when a test fails, change the `INCLUDE_FAIL` environment variable under the testing section in `docker-compose.yml` as follows:
+
+```yaml
+environment:
+  # All other variables remain the same
+  INCLUDE_FAIL: 1
+```
+
+The tests will fail and the container will exit with a non-zero exit code which, under normal circumstances, would cause a CI pipeline to fail.
+
+**Reminder:** The default value for `INCLUDE_FAIL` is `0`.
+
 ## Clean Up
 
 Run `npm run docker:clean` to remove old containers and delete the images built by the POC.

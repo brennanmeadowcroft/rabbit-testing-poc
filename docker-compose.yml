@@ -35,5 +35,6 @@ services:
       RABBIT_HOST: rabbit
       WORK_QUEUE: work
       RESPONSE_QUEUE: response
+      INCLUDE_FAIL: 0
     command:
       ["./wait-for-it/wait-for-it.sh", "api:8080", "-s", "--", "npm", "test"]
