@@ -30,6 +30,7 @@ services:
     build:
       context: .
       dockerfile: ./test/test.Dockerfile
+    container_name: service-tests
     environment:
       RABBIT_HOST: rabbit
       WORK_QUEUE: work

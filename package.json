@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "docker:rm": "docker rm -f rabbit my-service service-tests",
+    "docker:rmi": "docker rmi rabbit-testing-poc_api rabbit-testing-poc_testing rabbitmq:3.8.5",
+    "docker:clean": "npm run docker:rm && npm run docker:rmi",
     "test": "mocha test/*.test.js --exit",
     "test:docker-compose": "docker-compose up --build --abort-on-container-exit",
     "start": "node src/index.js",

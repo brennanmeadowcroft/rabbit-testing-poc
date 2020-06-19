@@ -10,6 +10,10 @@ This will startup the service, RabbitMQ and run the tests inside Docker Compose.
 
 **💡Note:** Logging is turned off entirely for Rabbit and minimized for the service to keep the noise down and make it easier to see the results of testing. This can be changed if needed, see [Logging](#logging)
 
+## Clean Up
+
+Run `npm run docker:clean` to remove old containers and delete the images built by the POC.
+
 ## Testing
 
 The tests maintain a Rabbit client that can be used to abstract out the request and response so it can be easily managed by the test suite. An alternative would be to use a Rabbit client maintained by the code but this runs the risk of having tests be too coupled to code level implementations so it was avoided in this case.
